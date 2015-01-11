@@ -6,7 +6,6 @@ python:
   - "2.7"
   - "3.4"
 
-
 install:
 # travis-ci use Ubuntu 12.04.5 LTS (Precise Pangolin) 64bit
 # install libclang1-3.4 libclang-common-3.4-dev
