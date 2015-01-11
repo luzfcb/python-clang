@@ -44,6 +44,8 @@ The major indexing objects are:
 Most object information is exposed using properties, when the underlying API
 call is efficient.
 """
+from __future__ import print_function
+from __future__ import absolute_import
 
 # TODO
 # ====
@@ -65,7 +67,7 @@ call is efficient.
 from ctypes import *
 import collections
 
-import clang.enumerations
+from . import enumerations
 
 # ctypes doesn't implicitly convert c_void_p to the appropriate wrapper
 # object. This is a problem, because it means that from_parameter will see an
@@ -510,7 +512,7 @@ class CursorKind(object):
         if value >= len(CursorKind._kinds):
             CursorKind._kinds += [None] * (value - len(CursorKind._kinds) + 1)
         if CursorKind._kinds[value] is not None:
-            raise ValueError,'CursorKind already loaded'
+            raise ValueError('CursorKind already loaded')
         self.value = value
         CursorKind._kinds[value] = self
         CursorKind._name_map = None
@@ -531,7 +533,7 @@ class CursorKind(object):
     @staticmethod
     def from_id(id):
         if id >= len(CursorKind._kinds) or CursorKind._kinds[id] is None:
-            raise ValueError,'Unknown cursor kind %d' % id
+            raise ValueError('Unknown cursor kind %d' % id)
         return CursorKind._kinds[id]
 
     @staticmethod
@@ -1441,7 +1443,7 @@ class TypeKind(object):
         if value >= len(TypeKind._kinds):
             TypeKind._kinds += [None] * (value - len(TypeKind._kinds) + 1)
         if TypeKind._kinds[value] is not None:
-            raise ValueError,'TypeKind already loaded'
+            raise ValueError('TypeKind already loaded')
         self.value = value
         TypeKind._kinds[value] = self
         TypeKind._name_map = None
@@ -1467,7 +1469,7 @@ class TypeKind(object):
     @staticmethod
     def from_id(id):
         if id >= len(TypeKind._kinds) or TypeKind._kinds[id] is None:
-            raise ValueError,'Unknown type kind %d' % id
+            raise ValueError('Unknown type kind %d' % id)
         return TypeKind._kinds[id]
 
     def __repr__(self):
@@ -1534,7 +1536,7 @@ class RefQualifierKind(object):
             num_kinds = value - len(RefQualifierKind._kinds) + 1
             RefQualifierKind._kinds += [None] * num_kinds
         if RefQualifierKind._kinds[value] is not None:
-            raise ValueError, 'RefQualifierKind already loaded'
+            raise ValueError('RefQualifierKind already loaded')
         self.value = value
         RefQualifierKind._kinds[value] = self
         RefQualifierKind._name_map = None
@@ -1556,7 +1558,7 @@ class RefQualifierKind(object):
     def from_id(id):
         if (id >= len(RefQualifierKind._kinds) or
                 RefQualifierKind._kinds[id] is None):
-            raise ValueError, 'Unknown type kind %d' % id
+            raise ValueError('Unknown type kind %d' % id)
         return RefQualifierKind._kinds[id]
 
     def __repr__(self):
@@ -2349,9 +2351,9 @@ class TranslationUnit(ClangObject):
                     # FIXME: It would be great to support an efficient version
                     # of this, one day.
                     value = value.read()
-                    print value
+                    print(value)
                 if not isinstance(value, str):
-                    raise TypeError,'Unexpected unsaved file contents.'
+                    raise TypeError('Unexpected unsaved file contents.')
                 unsaved_files_array[i].name = name
                 unsaved_files_array[i].contents = value
                 unsaved_files_array[i].length = len(value)
@@ -2413,9 +2415,9 @@ class TranslationUnit(ClangObject):
                     # FIXME: It would be great to support an efficient version
                     # of this, one day.
                     value = value.read()
-                    print value
+                    print(value)
                 if not isinstance(value, str):
-                    raise TypeError,'Unexpected unsaved file contents.'
+                    raise TypeError('Unexpected unsaved file contents.')
                 unsaved_files_array[i].name = name
                 unsaved_files_array[i].contents = value
                 unsaved_files_array[i].length = len(value)
@@ -3385,7 +3387,7 @@ class Config:
         return True
 
 def register_enumerations():
-    for name, value in clang.enumerations.TokenKinds:
+    for name, value in enumerations.TokenKinds:
         TokenKind.register(value, name)
 
 conf = Config()

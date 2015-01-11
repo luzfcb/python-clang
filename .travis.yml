@@ -4,8 +4,7 @@ language: python
 
 python:
   - "2.7"
-# python-clang is Python2 only
-#  - "3.4"
+  - "3.4"
 
 
 install:
