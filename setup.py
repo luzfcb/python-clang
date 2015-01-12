@@ -1,6 +1,13 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+from __future__ import unicode_literals
+from __future__ import print_function
+from __future__ import division
+from __future__ import absolute_import
+from future import standard_library
+standard_library.install_aliases()
+from builtins import *
 from setuptools import setup
 
 setup(name="clang",
@@ -21,6 +28,7 @@ setup(name="clang",
       author="Loic Jaquemet",  # meeeh... not.
       author_email="loic.jaquemet+python@gmail.com",
       zip_safe=False,
+      install_requires=['future>=0.14.3'],
       packages=["clang"],
       # use pip requirements.txt instead
       # install_requires = ["libclang"],
